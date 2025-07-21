@@ -11,14 +11,17 @@ const config = {
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
 
-const sql = `INSERT INTO people(name) values('Wesley')`
-connection.query(sql)
-connection.end()
+app.get('/', (req, res) => {
+  const sql = "INSERT INTO people(name) VALUES ('Victor Luiz')";
 
-
-app.get('/', (req,res) => {
-    res.send('<h1>Full Cycle</h1>')
-})
+  connection.query(sql, (error, results) => {
+    if (error) {
+      console.error('Erro ao inserir no banco:', error);
+      return res.status(500).send('Erro no servidor');
+    }
+    res.send('<h1>Full Cycle</h1>');
+  });
+});
 
 app.listen(port, ()=> {
     console.log('Rodando na porta ' + port)
