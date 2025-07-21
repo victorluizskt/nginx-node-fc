@@ -6,6 +6,7 @@ services:
     build: 
       context: node
     container_name: app
+    image: victorluizskt/fullcycle-node:latest
     entrypoint: sh -c "dockerize -wait tcp://db:3306 -timeout 20s && node index.js"
     networks: 
       - nodenet
@@ -36,6 +37,7 @@ services:
     build:
       context: ./nginx
     container_name: nginx_container
+    image: victorluizskt/fullcycle-nginx:latest
     ports:
       - "8080:80"
     depends_on: 
